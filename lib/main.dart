@@ -46,8 +46,11 @@ class _MyHomePageState extends State<MyHomePage> {
         body: new FutureBuilder(
           future: DefaultAssetBundle.of(context).loadString('assets/barcode.json'),
           builder: (context, snapshot) {
+            if (snapshot.hasData){
               List<Articoli> articoli = parseJson(snapshot.data.toString());
-              return articoli.isNotEmpty ? new ArticleList(articoli) : new Center(child: new CircularProgressIndicator());
+              return articoli.isNotEmpty ? new ArticleList(articoli) : new CircularProgressIndicator();
+            } else
+              return new Container();
             }
     )
     );
